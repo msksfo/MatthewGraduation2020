@@ -1,0 +1,210 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+:root {
+  --black: #333;
+  --red: #e00513;
+
+  --brown: #78584a;
+  --brown: #56423e;
+  --khaki: #d2bba0;
+  --cream: #fff8e8;
+
+  --lightBlue: #00bdd0;
+  --darkBlue: #1d3557;
+  --purple: #850067;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--black);
+}
+
+img {
+  max-width: 100%;
+}
+
+.contentWrapper {
+  /*  border: 1px solid blue; */
+}
+
+.contentWrapper::before {
+  content: "2020";
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  font-size: 15rem;
+  color: rgba(0, 0, 0, 0.05);
+  display: none;
+}
+
+.congrats {
+  /* border: 1px solid orange; */
+}
+
+.congrats h1 {
+  /*  border: 1px solid orange; */
+  /*  margin-left: 1rem; */
+  /*  margin-bottom: 1rem; */
+
+  padding: 0 1rem;
+  line-height: 1.3;
+  text-align: center;
+  letter-spacing: 1.2px;
+  font-size: 4rem;
+  font-family: cursive;
+
+  position: relative;
+}
+
+.congrats h1::after {
+  content: "2 0 2 0";
+  display: block;
+
+  font-size: 5rem;
+
+  color: rgba(0, 0, 0, 0.05);
+}
+
+.matthewSpan {
+  /* 
+  display: inline-block;
+  padding: 0 8px 3px;
+  background-image: linear-gradient(
+    transparent 0%,
+    transparent 60%,
+    var(--red) 80%,
+    transparent 80%
+  );
+  */
+}
+
+.congratulationsSpan {
+  font-size: 2rem;
+  font-family: sans-serif;
+  display: block;
+
+  /* background-image: linear-gradient(#fff 70%, var(--red) 55%); */
+}
+
+.ctaWrapper {
+  background-color: var(--red);
+  margin-bottom: 1rem;
+  padding: 50px 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* actually these are Links, not  buttons */
+.ctaButton {
+  display: inline-block;
+  padding: 10px 16px;
+  text-decoration: none;
+  background-color: #fa2f3c;
+  color: white;
+  box-shadow: 1px 1px 2px #9e040d;
+  transition: 0.3s ease-in-out;
+}
+
+.ctaButton:nth-of-type(1) {
+  margin-right: 10px;
+}
+
+.ctaButton:hover {
+  color: var(--red);
+  background-color: white;
+}
+
+/* ========= MEDIA QUERIES ===== */
+
+@media (min-width: 450px) {
+  .ctaWrapper {
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 500px) {
+  .congrats h1::after {
+    font-size: 9rem;
+  }
+}
+
+@media (min-width: 700px) {
+  .congrats h1::after {
+    display: none;
+  }
+
+  .contentWrapper {
+    /* top padding accounts for height of header */
+    padding: 50px 0 0;
+
+    display: grid;
+    grid-template-columns: 10% 1fr 300px 10%;
+    grid-template-rows: 300px 200px 150px;
+
+    position: relative;
+    z-index: 100;
+    /* margin-left accounts for width of red pseudo element running down the page */
+    margin-left: 100px;
+  }
+  .contentWrapper::before {
+    display: inline;
+    content: "2020";
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    font-size: 15rem;
+    color: rgba(0, 0, 0, 0.05);
+  }
+
+  .congrats {
+    display: flex;
+    grid-column: 2 / -2;
+    grid-row: 1 / 3;
+  }
+
+  .congrats h1 {
+    line-height: auto;
+    margin-left: 0;
+    letter-spacing: 1.2px;
+    font-family: cursive;
+    padding: 0 1rem 0 0;
+  }
+
+  .congratulationsSpan {
+    font-family: sans-serif;
+    display: block;
+  }
+
+  .imageWrapper {
+    max-width: 500px;
+    margin-left: auto;
+  }
+
+  .ctaWrapper {
+    background-color: var(--red);
+    padding-bottom: 1rem;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    grid-column: 3 / -1;
+    grid-row: 2 / 4;
+
+    position: relative;
+    z-index: -100;
+  }
+}

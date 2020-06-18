@@ -1,0 +1,164 @@
+.contentWrapper {
+  /* border: 1px solid blue; */
+}
+
+.cardDirections {
+  margin: 2rem 0;
+  padding: 0 1rem;
+  max-width: 500px;
+  /* border: 1px solid red; */
+}
+
+.cardDirectionsList {
+  position: relative;
+  padding-top: 1.75rem;
+}
+
+.cardDirectionsList li {
+  margin-bottom: 0.5rem;
+}
+
+.cardDirectionsList::after {
+  content: attr(aria-label);
+  position: absolute;
+  font-size: 1rem;
+  font-weight: bold;
+  top: 0;
+  left: 0;
+}
+
+.cardDirectionsList::before {
+  content: "";
+  height: calc(100% - 1.75rem);
+  width: 3px;
+  position: absolute;
+  top: 1.75rem;
+  left: 0;
+  background-color: var(--lightBlue);
+  background-color: dodgerblue;
+}
+
+.colorChoices {
+  padding: 0 1rem 0 2rem;
+  padding-top: 1.75rem;
+  /* border: 1px solid orange; */
+  display: inline-block;
+  position: relative;
+  max-width: 500px;
+}
+
+.colorChoices::after {
+  content: "Customization Tools";
+  position: absolute;
+  font-size: 1rem;
+  font-weight: bold;
+  top: 0;
+  left: 1rem;
+}
+
+.colorChoices::before {
+  content: "";
+  height: calc(100% - 1.75rem);
+  width: 3px;
+  position: absolute;
+  top: 1.75rem;
+  left: 1rem;
+  background-color: #bea6a0;
+  background-color: dodgerblue;
+}
+
+.colorChoices label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.colorChoices label:nth-of-type(1)::after {
+  content: "Note: changing background color will wipe out your work thus far.";
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.clearOrSubmitButtons {
+  margin: 2rem 1rem;
+
+  /* border-top: 6px double orange; */
+}
+
+.clearOrSubmitButtons button {
+  width: 100px;
+  font-size: inherit;
+  padding: 6px 0;
+}
+
+.clearOrSubmitButtons button:hover {
+  cursor: pointer;
+}
+
+.clearOrSubmitButtons button:nth-of-type(1) {
+  margin-right: 1rem;
+}
+
+.clearButton {
+  background-color: #eaf5ff;
+  outline: 1px solid dodgerblue;
+  border: 0;
+  transition: all 0.3s ease;
+}
+
+.clearButton:hover {
+  color: white;
+  background-color: #0070e0;
+}
+
+.submitButton {
+  background-color: #ffe3df;
+  outline: 1px solid #ff4024;
+  border: 0;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #ff4f35;
+}
+
+.canvasWrapper {
+  position: relative;
+  max-width: 500px;
+  margin: 0 1rem 1.5rem;
+}
+
+canvas {
+  border: 1px solid dodgerblue;
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 700px) {
+  .contentWrapper {
+    /* top padding accounts for height of header */
+    padding: 0;
+
+    /* 
+    do i still need these, like in index styles?
+    position: relative;
+    z-index: 100;
+    */
+
+    /* margin-left accounts for width of red pseudo element running down the page */
+    margin-left: 100px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .colorChoices {
+    margin-top: 2rem;
+  }
+
+  .gridWrapper {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}

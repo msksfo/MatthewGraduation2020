@@ -1,0 +1,73 @@
+.contentWrapper {
+  min-height: calc(100vh - 50px);
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.text {
+  position: relative;
+
+  background-color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  align-items: center;
+}
+
+.text::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -120%);
+
+  width: 150px;
+  height: 100px;
+
+  background-image: url("../images/thankyou.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.paypalLink {
+  text-decoration: none;
+  display: inline-block;
+  color: inherit;
+}
+
+.moneyEmoji {
+  display: inline-block;
+
+  font-size: 2rem;
+  translate: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.paypalLink:hover {
+  color: green;
+}
+
+.paypalLink:hover .moneyEmoji {
+  transform: scale(1.5) translateX(4px);
+}
+
+svg {
+  background: url("../images/pattern.png");
+  background-size: cover;
+}
+
+@media only screen and (max-device-width: 650px) and (orientation: landscape) {
+  .text::before {
+    top: -5px;
+    left: 0;
+    transform: translate(0, 0);
+  }
+}
+
+@media (min-width: 700px) {
+  .contentWrapper {
+    margin-left: 100px;
+  }
+}

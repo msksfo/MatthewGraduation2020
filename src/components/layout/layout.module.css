@@ -1,0 +1,63 @@
+.layoutWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  /* border: 1px solid purple; */
+}
+
+.layoutWrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100px;
+  background-color: var(--red);
+}
+
+.initialsLinkToHome {
+  position: absolute;
+  top: 0.9rem;
+  left: 1rem;
+  font-size: 1.3rem;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.initialsLinkToHome::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transform: translateY(8px);
+  transition: all 0.3s ease;
+  display: block;
+  opacity: 0;
+}
+
+.initialsLinkToHome:hover::after {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.main {
+  flex: 1;
+
+  /* ? why did I have to add these 2 lines???? */
+  position: relative;
+  z-index: 0;
+}
+
+@media (min-width: 700px) {
+  .initialsLinkToHome {
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+  }
+
+  .layoutWrapper::before {
+    height: 100%;
+  }
+}

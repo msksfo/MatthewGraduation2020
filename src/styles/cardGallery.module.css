@@ -1,0 +1,29 @@
+.contentWrapper {
+  padding: 1rem;
+  border: 1px solid green;
+}
+
+.cardGrid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card {
+  border: 1px solid #bbb;
+  transition: transform 0.5s ease-in;
+}
+
+/* 
+.card:hover {
+   how to do this nicely? no overflow, growing in the proper direction, etc 
+  transform: scale(1.2);
+}
+*/
+
+@media (min-width: 700px) {
+  .contentWrapper {
+    /* margin-left accounts for width of red pseudo element running down the page */
+    margin-left: 100px;
+  }
+}
