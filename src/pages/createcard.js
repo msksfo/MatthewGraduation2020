@@ -225,6 +225,7 @@ const CreateCard = props => {
               ></textarea>
             </label>
             <button
+              className={createCardStyles.addMessageButton}
               onClick={e => {
                 const ctx = canvasRef.current.getContext("2d")
                 const birthdayMessage = message
