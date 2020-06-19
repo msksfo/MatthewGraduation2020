@@ -1,6 +1,7 @@
 .contentWrapper {
-  padding: 1rem;
-  margin-bottom: 1rem;
+  min-height: calc(100vh - 68px);
+  padding: 2rem;
+
   background-image: radial-gradient(
       circle at center center,
       rgba(184, 184, 184, 0.05) 0%,
@@ -32,7 +33,6 @@
       rgb(255, 255, 255) 100%
     );
   background-size: 95px 95px;
-  /* border: 1px solid green; */
 }
 
 .cardGrid {
