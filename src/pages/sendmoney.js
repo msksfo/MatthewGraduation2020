@@ -15,7 +15,7 @@ const SendMoney = props => {
             </span>{" "}
             <a
               className={sendMoneyStyles.paypalLink}
-              href="https://www.paypal.me/TiaEsguerra"
+              href="https://www.paypal.me/MFE5150"
               target="_blank"
               rel="noopener noreferrer"
             >
