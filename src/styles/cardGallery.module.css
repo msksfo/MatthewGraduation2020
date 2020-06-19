@@ -1,6 +1,38 @@
 .contentWrapper {
   padding: 1rem;
-  border: 1px solid green;
+  margin-bottom: 1rem;
+  background-image: radial-gradient(
+      circle at center center,
+      rgba(184, 184, 184, 0.05) 0%,
+      rgba(184, 184, 184, 0.05) 13%,
+      rgba(164, 164, 164, 0.05) 13%,
+      rgba(164, 164, 164, 0.05) 18%,
+      rgba(106, 106, 106, 0.05) 18%,
+      rgba(106, 106, 106, 0.05) 27%,
+      rgba(145, 145, 145, 0.05) 27%,
+      rgba(145, 145, 145, 0.05) 64%,
+      rgba(203, 203, 203, 0.05) 64%,
+      rgba(203, 203, 203, 0.05) 85%,
+      rgba(125, 125, 125, 0.05) 85%,
+      rgba(125, 125, 125, 0.05) 100%
+    ),
+    radial-gradient(
+      circle at center center,
+      rgb(255, 255, 255) 0%,
+      rgb(255, 255, 255) 8%,
+      rgb(255, 255, 255) 8%,
+      rgb(255, 255, 255) 17%,
+      rgb(255, 255, 255) 17%,
+      rgb(255, 255, 255) 61%,
+      rgb(255, 255, 255) 61%,
+      rgb(255, 255, 255) 69%,
+      rgb(255, 255, 255) 69%,
+      rgb(255, 255, 255) 88%,
+      rgb(255, 255, 255) 88%,
+      rgb(255, 255, 255) 100%
+    );
+  background-size: 95px 95px;
+  /* border: 1px solid green; */
 }
 
 .cardGrid {
