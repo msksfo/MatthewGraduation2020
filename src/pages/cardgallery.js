@@ -24,7 +24,6 @@ function CardGallery() {
   return (
     <Layout>
       <div className={cardGalleryStyles.contentWrapper}>
-        card gallery here
         <div className={cardGalleryStyles.cardGrid}>
           {cloudinaryImages.map((image, idx) => (
             <img
