@@ -1,12 +1,18 @@
 .contentWrapper {
-  /* border: 1px solid blue; */
+  position: relative;
 }
 
+/* ======= Card Directions list ===== */
 .cardDirections {
   margin: 2rem 0;
   padding: 0 1rem;
   max-width: 500px;
   /* border: 1px solid red; */
+}
+
+.cardDirections p {
+  font-size: 1.2rem;
+  margin-bottom: 2.8rem;
 }
 
 .cardDirectionsList {
@@ -38,13 +44,15 @@
   background-color: dodgerblue;
 }
 
+/* ===== Color choices ======== */
 .colorChoices {
-  padding: 0 1rem 0 2rem;
-  padding-top: 1.75rem;
+  padding: 1.75rem 1rem 0 2rem;
+
   /* border: 1px solid orange; */
   display: inline-block;
   position: relative;
   max-width: 500px;
+  margin-bottom: 2.5rem;
 }
 
 .colorChoices::after {
@@ -79,10 +87,28 @@
   font-weight: bold;
 }
 
-.clearOrSubmitButtons {
-  margin: 2rem 1rem;
+/* ===== Buttons -> ADD message to canvas, CLEAR canvas, SUBMIT card ===== */
+.addMessageButton {
+  font-size: inherit;
+  padding: 6px 12px;
+  background-color: #ecf1f6;
+  border: 0;
+  outline: 1px solid #d69efc;
+}
 
-  /* border-top: 6px double orange; */
+.addMessageButton:hover {
+  background-image: linear-gradient(
+    to right bottom,
+    #ecf1f6,
+    #d1e2ff,
+    #c4d0ff,
+    #c6b9ff,
+    #d69efc
+  );
+}
+
+.clearOrSubmitButtons {
+  margin: 2rem 1rem 1rem;
 }
 
 .clearOrSubmitButtons button {
@@ -150,15 +176,51 @@ canvas {
   }
 }
 
+@media (min-width: 800px) {
+  .contentWrapper::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: calc(100% - 550px);
+    height: 100%;
+
+    background-image: radial-gradient(
+        circle at center center,
+        rgba(184, 184, 184, 0.05) 0%,
+        rgba(184, 184, 184, 0.05) 13%,
+        rgba(164, 164, 164, 0.05) 13%,
+        rgba(164, 164, 164, 0.05) 18%,
+        rgba(106, 106, 106, 0.05) 18%,
+        rgba(106, 106, 106, 0.05) 27%,
+        rgba(145, 145, 145, 0.05) 27%,
+        rgba(145, 145, 145, 0.05) 64%,
+        rgba(203, 203, 203, 0.05) 64%,
+        rgba(203, 203, 203, 0.05) 85%,
+        rgba(125, 125, 125, 0.05) 85%,
+        rgba(125, 125, 125, 0.05) 100%
+      ),
+      radial-gradient(
+        circle at center center,
+        rgb(255, 255, 255) 0%,
+        rgb(255, 255, 255) 8%,
+        rgb(255, 255, 255) 8%,
+        rgb(255, 255, 255) 17%,
+        rgb(255, 255, 255) 17%,
+        rgb(255, 255, 255) 61%,
+        rgb(255, 255, 255) 61%,
+        rgb(255, 255, 255) 69%,
+        rgb(255, 255, 255) 69%,
+        rgb(255, 255, 255) 88%,
+        rgb(255, 255, 255) 88%,
+        rgb(255, 255, 255) 100%
+      );
+    background-size: 65px 65px;
+  }
+}
+
 @media (min-width: 1000px) {
   .colorChoices {
     margin-top: 2rem;
-  }
-
-  .gridWrapper {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
   }
 }
