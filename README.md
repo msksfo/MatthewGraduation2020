@@ -19,8 +19,8 @@ I am using Gatsby as the static site generator, Cloudinary for cloud-based image
 
 - Favicon created at [favicon.io](https://favicon.io)
 - Gradient backgrounds by [Gradient Magic](http://gradientmagic.com)
-- Send money page, thank you png by [pngimg](www.pngimg.com/imgs/words_phrases/thank_you/)
-- Send money page, decorative svg pattern by [ls graphics](https://products.ls.graphics/paaaterns/index.html)
+- Send money page, thank you png by [pngimg](http://pngimg.com/imgs/words_phrases/thank_you/)
+- Send money page, decorative svg pattern by [ls graphics](https://www.ls.graphics)
 
 ## About Gatsby
 
