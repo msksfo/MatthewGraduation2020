@@ -1,4 +1,5 @@
 import React from "react"
+import Head from "../components/head"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout/layout"
@@ -11,6 +12,7 @@ import matthew from "../images/matthewBlueRobe.jpg"
 
 const IndexPage = () => (
   <Layout>
+    <Head title="Home" />
     <div className={indexStyles.contentWrapper}>
       <div className={indexStyles.congrats}>
         <h1>

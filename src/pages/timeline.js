@@ -1,4 +1,5 @@
 import React from "react"
+import Head from "../components/head"
 import Layout from "../components/layout/layout"
 import timelineStyles from "../styles/timeline.module.css"
 
@@ -9,6 +10,7 @@ import matthewGraduates from "../images/matthewcopy.jpg"
 function Timeline() {
   return (
     <Layout>
+      <Head title="The Journey" />
       <section className={timelineStyles.contentWrapper}>
         <h1>This is my life</h1>
         <ul className={timelineStyles.timelineList}>

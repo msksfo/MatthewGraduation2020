@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
+import Head from "../components/head"
 
 import Layout from "../components/layout/layout"
 import createCardStyles from "../styles/createCard.module.css"
@@ -23,15 +24,28 @@ const CreateCard = props => {
   // width of canvas parent div
   const [width, setWidth] = useState(0)
 
+  // the boundingClientRect() of the canvas element
+  const [bounds, setBounds] = useState({ top: 0, left: 0, right: 0, bottom: 0 })
+
   const canvasRef = useRef(null)
 
   useEffect(() => {
+    let dpi = window.devicePixelRatio
     const canvas = canvasRef.current.getContext("2d")
 
     // when the canvas parent div is mounted, get it's width. the canvas width will be the size of it's parent.
-
     if (canvasRef.current.parentNode) {
-      setWidth(canvasRef.current.parentNode.offsetWidth)
+      // ! remove * dpi
+      setWidth(canvasRef.current.parentNode.clientWidth * dpi)
+
+      setBounds(() => {
+        return {
+          top: canvasRef.current.getBoundingClientRect().top,
+          left: canvasRef.current.getBoundingClientRect().left,
+          right: canvasRef.current.getBoundingClientRect().right,
+          bottom: canvasRef.current.getBoundingClientRect().bottom,
+        }
+      })
     }
 
     if (clearedCanvas) {
@@ -55,6 +69,8 @@ const CreateCard = props => {
   }, [clearedCanvas, canvasBackgroundColor, cardSubmitted, width])
 
   const draw = (e, context, locationObject) => {
+    context.scale(2, 2)
+
     context.strokeStyle = brushStrokeColor
     context.lineWidth = brushStrokeSize
 
@@ -65,6 +81,8 @@ const CreateCard = props => {
     if (!isDrawing) {
       return
     } else {
+      //console.log(e.nativeEvent.clientX - bounds.left)
+
       context.beginPath()
 
       // start from coordinates held in state
@@ -73,13 +91,39 @@ const CreateCard = props => {
       // go to wherever they have moved the mouse to
       context.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
 
+      //! comment this out
+      /*
+      context.lineTo(
+        e.nativeEvent.clientX - bounds.left,
+        e.nativeEvent.clientY - bounds.top
+      )
+        */
+
+      /*
+      context.lineTo(
+        ((e.nativeEvent.clientX - bounds.left) / (bounds.right - bounds.left)) *
+          width,
+        ((e.nativeEvent.clientY - bounds.top) / (bounds.bottom - bounds.top)) *
+          width
+      )
+        */
+
       context.stroke()
 
       // update state coordinates
+
       setCoords({
         x: e.nativeEvent.offsetX,
         y: e.nativeEvent.offsetY,
       })
+
+      //! comment this out
+      /*
+      setCoords({
+        x: e.nativeEvent.clientX - bounds.left,
+        y: e.nativeEvent.clientY - bounds.top,
+      })
+      */
     }
   }
 
@@ -144,6 +188,7 @@ const CreateCard = props => {
 
   return (
     <Layout>
+      <Head title="Create Card" />
       <div className={createCardStyles.contentWrapper}>
         <div className={createCardStyles.gridWrapper}>
           <div className={createCardStyles.cardDirections}>
@@ -268,6 +313,10 @@ const CreateCard = props => {
               // with vanilla js, I would use e.offsetX but in react this is undefined, so use nativeEvent to get what I want
               const x = e.nativeEvent.offsetX
               const y = e.nativeEvent.offsetY
+
+              //! comment these out
+              //const x = e.nativeEvent.clientX - bounds.left
+              //const y = e.nativeEvent.clientY - bounds.top
 
               setIsDrawing(true)
               setCoords({

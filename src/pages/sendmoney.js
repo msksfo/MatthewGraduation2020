@@ -1,12 +1,16 @@
 import React from "react"
+import Head from "../components/head"
 import ifEmoji from "if-emoji"
 import Layout from "../components/layout/layout"
 import sendMoneyStyles from "../styles/sendmoney.module.css"
 
 const SendMoney = props => {
+  // if the emoji is not available, don't render the surrounding span
   let moneyFace = ifEmoji("🤑")
+
   return (
     <Layout>
+      <Head title="Send Money (thank you!)" />
       <div className={sendMoneyStyles.contentWrapper}>
         <div className={sendMoneyStyles.text}>
           {" "}

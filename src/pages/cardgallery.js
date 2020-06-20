@@ -1,4 +1,5 @@
 import React from "react"
+import Head from "../components/head"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout/layout"
@@ -23,6 +24,7 @@ function CardGallery() {
 
   return (
     <Layout>
+      <Head title="Card Gallery" />
       <div className={cardGalleryStyles.contentWrapper}>
         <div className={cardGalleryStyles.cardGrid}>
           {cloudinaryImages.map((image, idx) => (
