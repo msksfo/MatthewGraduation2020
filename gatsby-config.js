@@ -23,6 +23,7 @@ module.exports = {
         resourceType: `image`,
         type: `upload`,
         prefix: `matthewGraduationProject/`,
+        context: true,
       },
     },
     {
