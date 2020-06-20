@@ -33,6 +33,7 @@
       rgb(255, 255, 255) 100%
     );
   background-size: 95px 95px;
+  /* background-size: 65px 65px; */
 }
 
 .cardGrid {
@@ -46,16 +47,21 @@
   transition: transform 0.5s ease-in;
 }
 
-/* 
-.card:hover {
-   how to do this nicely? no overflow, growing in the proper direction, etc 
-  transform: scale(1.2);
-}
-*/
-
 @media (min-width: 700px) {
   .contentWrapper {
     /* margin-left accounts for width of red pseudo element running down the page */
     margin-left: 100px;
+  }
+}
+
+@media (min-width: 800px) {
+  .card:hover {
+    transform: scale(1.1);
+  }
+}
+
+@media (min-width: 1130px) {
+  .card:hover {
+    transform: scale(1.25);
   }
 }
