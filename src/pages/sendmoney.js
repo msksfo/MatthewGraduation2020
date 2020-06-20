@@ -1,8 +1,10 @@
 import React from "react"
+import ifEmoji from "if-emoji"
 import Layout from "../components/layout/layout"
 import sendMoneyStyles from "../styles/sendmoney.module.css"
 
 const SendMoney = props => {
+  let moneyFace = ifEmoji("🤑")
   return (
     <Layout>
       <div className={sendMoneyStyles.contentWrapper}>
@@ -20,13 +22,17 @@ const SendMoney = props => {
               rel="noopener noreferrer"
             >
               paypal{" "}
-              <span
-                role="img"
-                aria-label="money eyes emoji"
-                className={sendMoneyStyles.moneyEmoji}
-              >
-                &#129297;
-              </span>
+              {moneyFace ? (
+                <span
+                  role="img"
+                  aria-label="money eyes emoji"
+                  className={sendMoneyStyles.moneyEmoji}
+                >
+                  &#129297;
+                </span>
+              ) : (
+                ""
+              )}
             </a>
           </p>
         </div>{" "}
