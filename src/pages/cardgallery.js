@@ -6,11 +6,9 @@ import Layout from "../components/layout/layout"
 import cardGalleryStyles from "../styles/cardGallery.module.css"
 
 function CardGallery() {
-  // * i need state in this component. when a card is added, state changes and this component should be rerendered with the new card
-
   const data = useStaticQuery(graphql`
     query CloudinaryImages {
-      allCloudinaryMedia {
+      allCloudinaryMedia(sort: { fields: created_at, order: DESC }) {
         edges {
           node {
             secure_url
