@@ -36,7 +36,7 @@ const CreateCard = props => {
     // when the canvas parent div is mounted, get it's width. the canvas width will be the size of it's parent.
     if (canvasRef.current.parentNode) {
       // ! remove * dpi
-      setWidth(canvasRef.current.parentNode.clientWidth * dpi)
+      setWidth(canvasRef.current.parentNode.clientWidth)
 
       setBounds(() => {
         return {
@@ -69,7 +69,7 @@ const CreateCard = props => {
   }, [clearedCanvas, canvasBackgroundColor, cardSubmitted, width])
 
   const draw = (e, context, locationObject) => {
-    context.scale(2, 2)
+    //context.scale(2, 2)
 
     context.strokeStyle = brushStrokeColor
     context.lineWidth = brushStrokeSize
