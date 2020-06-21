@@ -11,6 +11,9 @@ const CreateCard = props => {
   const [clearedCanvas, setClearedCanvas] = useState(false)
   const [cardSubmitted, setCardSubmitted] = useState(false)
 
+  // dont allow user to submit unless they drew something
+  const [isValidSubmission, setIsValidSubmission] = useState(false)
+
   // When the canvas is first mounted, color the background white. Otherwise, when I save the canvas as an image, the background will be black.
   const [canvasBackgroundColor, setCanvasBackgroundColor] = useState("#ffffff")
 
@@ -30,12 +33,35 @@ const CreateCard = props => {
   const canvasRef = useRef(null)
 
   useEffect(() => {
+    document.body.addEventListener("touchstart", function (e) {
+      //console.log(e.target.localName === "canvas")
+
+      if (e.target.localName === "canvas") {
+        e.preventDefault()
+        //console.log(e.target)
+      }
+    })
+
+    document.body.addEventListener(
+      "touchmove",
+      function (e) {
+        //console.log(e.target)
+        if (e.target.localName === "canvas") {
+          e.preventDefault()
+          //console.log(e.target)
+        }
+      },
+      { passive: false }
+    )
+  }, [])
+
+  useEffect(() => {
     let dpi = window.devicePixelRatio
     const canvas = canvasRef.current.getContext("2d")
 
     // when the canvas parent div is mounted, get it's width. the canvas width will be the size of it's parent.
     if (canvasRef.current.parentNode) {
-      // ! remove * dpi
+      // ! removed * dpi until I figure out how to make it work
       setWidth(canvasRef.current.parentNode.clientWidth)
 
       setBounds(() => {
@@ -46,12 +72,14 @@ const CreateCard = props => {
           bottom: canvasRef.current.getBoundingClientRect().bottom,
         }
       })
+      //console.log(bounds)
     }
 
     if (clearedCanvas) {
       setCanvasBackgroundColor("#ffffff")
       setClearedCanvas(false)
       setMessage("")
+      setIsValidSubmission(false)
     } else if (cardSubmitted) {
       setCanvasBackgroundColor("#ffffff")
       setBrushStrokeSize(1)
@@ -60,6 +88,7 @@ const CreateCard = props => {
       setClearedCanvas(false)
       setCardSubmitted(false)
       setMessage("")
+      setIsValidSubmission(false)
     }
 
     canvas.fillStyle = canvasBackgroundColor
@@ -68,9 +97,14 @@ const CreateCard = props => {
     // Rerun this effect when user clears the canvas, submits the card, choses a different background color, or resizes the browser
   }, [clearedCanvas, canvasBackgroundColor, cardSubmitted, width])
 
-  const draw = (e, context, locationObject) => {
-    //context.scale(2, 2)
+  const getMousePosition = e => {
+    return {
+      x: e.clientX - bounds.left,
+      y: e.clientY - bounds.top,
+    }
+  }
 
+  const draw = (e, context, locationObject) => {
     context.strokeStyle = brushStrokeColor
     context.lineWidth = brushStrokeSize
 
@@ -81,49 +115,82 @@ const CreateCard = props => {
     if (!isDrawing) {
       return
     } else {
-      //console.log(e.nativeEvent.clientX - bounds.left)
-
       context.beginPath()
 
       // start from coordinates held in state
       context.moveTo(locationObject.x, locationObject.y)
 
       // go to wherever they have moved the mouse to
+      // ! this works but the image is blurry
       context.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
 
-      //! comment this out
-      /*
-      context.lineTo(
-        e.nativeEvent.clientX - bounds.left,
-        e.nativeEvent.clientY - bounds.top
-      )
-        */
-
+      //! this makes image sharp (when multiplying width by dpi) but mouse position is off
       /*
       context.lineTo(
         ((e.nativeEvent.clientX - bounds.left) / (bounds.right - bounds.left)) *
           width,
         ((e.nativeEvent.clientY - bounds.top) / (bounds.bottom - bounds.top)) *
-          width
+          (width * 0.75)
       )
-        */
+      */
 
       context.stroke()
 
       // update state coordinates
-
+      //! this works, but the image is blurry
       setCoords({
         x: e.nativeEvent.offsetX,
         y: e.nativeEvent.offsetY,
       })
 
-      //! comment this out
+      setIsValidSubmission(true)
+
+      //! this makes a sharp image, but the mouse position is off
       /*
       setCoords({
-        x: e.nativeEvent.clientX - bounds.left,
-        y: e.nativeEvent.clientY - bounds.top,
+        x:
+          ((e.nativeEvent.clientX - bounds.left) /
+            (bounds.right - bounds.left)) *
+          width,
+        y:
+          ((e.nativeEvent.clientY - bounds.top) /
+            (bounds.bottom - bounds.top)) *
+          (width * 0.75),
       })
       */
+    }
+  }
+
+  const mobileDraw = (e, context, locationObject) => {
+    console.log(e)
+    context.strokeStyle = brushStrokeColor
+    context.lineWidth = brushStrokeSize
+
+    context.linejoin = "round"
+    context.linecap = "round"
+
+    // do not draw if they are moving the mouse, but not moused down
+    if (!isDrawing) {
+      return
+    } else {
+      context.beginPath()
+
+      // start from coordinates held in state
+      context.moveTo(locationObject.x, locationObject.y)
+
+      // go to wherever they have moved the mouse to
+      let touch = e.touches[0]
+      context.lineTo(touch.clientX - bounds.left, touch.clientY - bounds.top)
+
+      context.stroke()
+
+      // update state coordinates
+      setCoords({
+        x: touch.clientX - bounds.left,
+        y: touch.clientY - bounds.top,
+      })
+
+      setIsValidSubmission(true)
     }
   }
 
@@ -159,11 +226,10 @@ const CreateCard = props => {
     }
 
     context.fillText(line, x, y)
+    setIsValidSubmission(true)
   }
 
   const uploadToCloudinary = imageUrl => {
-    // TODO: don's submit unless they've actually drawn something.
-
     const uploadPreset = "mattGradProject"
     const uploadEndpoint = "https://api.cloudinary.com/v1_1/tesguerra/upload/"
 
@@ -249,6 +315,7 @@ const CreateCard = props => {
               Brush stroke thickness: &nbsp;
               <input
                 type="number"
+                min="1"
                 name="strokeThicknessInput"
                 id="strokeThicknessInput"
                 value={brushStrokeSize}
@@ -296,8 +363,11 @@ const CreateCard = props => {
             className={createCardStyles.submitButton}
             onClick={e => {
               const data = canvasRef.current.toDataURL("image/jpeg")
-              uploadToCloudinary(data)
-              setCardSubmitted(true)
+
+              if (isValidSubmission) {
+                uploadToCloudinary(data)
+                setCardSubmitted(true)
+              }
             }}
           >
             Submit
@@ -311,12 +381,36 @@ const CreateCard = props => {
             height={width * 0.75}
             onMouseDown={e => {
               // with vanilla js, I would use e.offsetX but in react this is undefined, so use nativeEvent to get what I want
+              // ! this works but the image is blurry
               const x = e.nativeEvent.offsetX
               const y = e.nativeEvent.offsetY
 
-              //! comment these out
-              //const x = e.nativeEvent.clientX - bounds.left
-              //const y = e.nativeEvent.clientY - bounds.top
+              //! wip, mouse position is still off
+              /*
+              const x =
+                ((e.nativeEvent.clientX - bounds.left) /
+                  (bounds.right - bounds.left)) *
+                width
+              const y =
+                ((e.nativeEvent.clientY - bounds.top) /
+                  (bounds.bottom - bounds.top)) *
+                (width * 0.75)
+              */
+
+              setIsDrawing(true)
+              setCoords({
+                x,
+                y,
+              })
+            }}
+            onTouchStart={e => {
+              let touch = e.touches[0]
+              console.log(touch)
+
+              let x = touch.clientX - bounds.left
+              let y = touch.clientY - bounds.top
+
+              console.log(x, y, bounds)
 
               setIsDrawing(true)
               setCoords({
@@ -328,6 +422,22 @@ const CreateCard = props => {
               const ctx = canvasRef.current.getContext("2d")
 
               draw(e, ctx, coords)
+            }}
+            onTouchMove={e => {
+              let touch = e.touches[0]
+              let x = touch.clientX - bounds.left
+              let y = touch.clientY - bounds.top
+
+              const ctx = canvasRef.current.getContext("2d")
+
+              mobileDraw(e, ctx, coords)
+            }}
+            onTouchEnd={e => {
+              setIsDrawing(false)
+              setCoords({
+                x: 0,
+                y: 0,
+              })
             }}
             onMouseUp={() => {
               setIsDrawing(false)
