@@ -1,0 +1,86 @@
+[
+  {
+    "date": "September 19, 2001",
+    "title": "I was born",
+    "imageUrl": "./images/birth.jpg",
+    "imageAlt": "Matthew was born",
+    "description": "This is me. Super cute. I guess it needs no further explanation."
+  },
+  {
+    "date": "September 20, 2001",
+    "title": "Genius baby learns to walk",
+    "imageUrl": "./images/walking.jpg",
+    "imageAlt": "Matthew's first steps",
+    "description": "My first steps."
+  },
+  {
+    "date": "April, 2004",
+    "title": "The stork brought me a sister!",
+    "imageUrl": "./images/withCalista.jpg",
+    "imageAlt": "Matthew holding his sister, Calista",
+    "description": "Learning to be the best big brother ever."
+  },
+  {
+    "date": "June, 2007",
+    "title": "Attending my parents wedding",
+    "imageUrl": "./images/wedding.jpg",
+    "imageAlt": "Matthew and Ed",
+    "description": "This is my best man, always and forever."
+  },
+  {
+    "date": "2010",
+    "title": "Playing with Rhi",
+    "imageUrl": "./images/withRhi.jpg",
+    "imageAlt": "Matthew with Rhiannon",
+    "description": "Teaching Rhi to work hard, play harder."
+  },
+  {
+    "date": "November 2010",
+    "title": "Finally, a brother!",
+    "imageUrl": "./images/withKekoa.jpg",
+    "imageAlt": "Matthew with Kekoa",
+    "description": "I am a pro at this now."
+  },
+  {
+    "date": "2014",
+    "title": "My elementary school graduation!",
+    "imageUrl": "./images/elementaryGrad.jpg",
+    "imageAlt": "Matthew's elementary school graduation",
+    "description": "On to better and finer things."
+  },
+  {
+    "date": "December, 2014",
+    "title": "This was soooooo cool!",
+    "imageUrl": "./images/flying.jpg",
+    "imageAlt": "Matthew's goes flying with Alex.",
+    "description": "My favorite Uncle took me for an aerobatic flight in the super decathalon!"
+  },
+  {
+    "date": "???",
+    "title": "Band",
+    "imageUrl": "./images/band.jpg",
+    "imageAlt": "Matthew in band uniform.",
+    "description": "I love band."
+  },
+  {
+    "date": "2018",
+    "title": "Drumline",
+    "imageUrl": "./images/drumline.jpg",
+    "imageAlt": "Matthew participates in drumline.",
+    "description": "Doing fun drumline stuff."
+  },
+  {
+    "date": "2020",
+    "title": "I'm officially enrolled in the military!",
+    "imageUrl": "./images/military.jpg",
+    "imageAlt": "Matthew enrolls in the military.",
+    "description": "Me and the military guy."
+  },
+  {
+    "date": "June 2020",
+    "title": "High School graduate!",
+    "imageUrl": "./images/matthewCopy.jpg",
+    "imageAlt": "Matthew enrolls in the military.",
+    "description": "I graduated from high school in 2020, year of the global covid-19 pandemic. So weird. So proud. I did it!!"
+  }
+]
