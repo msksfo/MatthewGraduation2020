@@ -15,9 +15,6 @@ html {
   --black: #333;
   --red: #e00513;
 
-  --brown: #78584a;
-  --brown: #56423e;
-  --khaki: #d2bba0;
   --cream: #fff8e8;
 
   --lightBlue: #00bdd0;
@@ -26,7 +23,8 @@ html {
 }
 
 body {
-  margin: 0;
+  max-width: 1588px;
+  margin: 0 auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--black);
