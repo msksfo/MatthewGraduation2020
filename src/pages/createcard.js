@@ -33,26 +33,48 @@ const CreateCard = props => {
   const canvasRef = useRef(null)
 
   useEffect(() => {
-    document.body.addEventListener("touchstart", function (e) {
-      //console.log(e.target.localName === "canvas")
+    function preventDefault(e) {
+      e.preventDefault()
+    }
 
-      if (e.target.localName === "canvas") {
-        e.preventDefault()
-        //console.log(e.target)
-      }
-    })
+    document.body.addEventListener(
+      "touchstart",
+      function (e) {
+        if (e.target.localName === "canvas") {
+          //e.preventDefault()
+          preventDefault(e)
+        }
+      },
+      false
+    )
+
+    document.body.addEventListener(
+      "touchend",
+      function (e) {
+        if (e.target.localName === "canvas") {
+          //e.preventDefault()
+          preventDefault(e)
+        }
+      },
+      false
+    )
 
     document.body.addEventListener(
       "touchmove",
       function (e) {
-        //console.log(e.target)
         if (e.target.localName === "canvas") {
-          e.preventDefault()
-          //console.log(e.target)
+          //e.preventDefault()
+          preventDefault(e)
         }
       },
       { passive: false }
     )
+
+    return () => {
+      document.body.removeEventListener("touchstart", preventDefault)
+      document.body.removeEventListener("touchend", preventDefault)
+      document.body.removeEventListener("touchmove", preventDefault)
+    }
   }, [])
 
   useEffect(() => {
@@ -72,7 +94,7 @@ const CreateCard = props => {
           bottom: canvasRef.current.getBoundingClientRect().bottom,
         }
       })
-      //console.log(bounds)
+      console.log(bounds)
     }
 
     if (clearedCanvas) {
@@ -92,17 +114,10 @@ const CreateCard = props => {
     }
 
     canvas.fillStyle = canvasBackgroundColor
-    canvas.fillRect(0, 0, width, width)
+    canvas.fillRect(0, 0, width, width * 0.75)
 
     // Rerun this effect when user clears the canvas, submits the card, choses a different background color, or resizes the browser
-  }, [clearedCanvas, canvasBackgroundColor, cardSubmitted, width])
-
-  const getMousePosition = e => {
-    return {
-      x: e.clientX - bounds.left,
-      y: e.clientY - bounds.top,
-    }
-  }
+  }, [canvasBackgroundColor, clearedCanvas, cardSubmitted, width])
 
   const draw = (e, context, locationObject) => {
     context.strokeStyle = brushStrokeColor
@@ -276,7 +291,11 @@ const CreateCard = props => {
               </li>
               <li>
                 Draw a picture, if you want. Feel free to change the brush color
-                and/or the brush stroke thickness.
+                and/or the brush stroke thickness.{" "}
+                <em>
+                  Drawing functionality does not work on touch screens at the
+                  moment.
+                </em>
               </li>
               <li>
                 Click 'Submit' to send me the card when you are finished. Click
@@ -337,6 +356,8 @@ const CreateCard = props => {
               ></textarea>
             </label>
             <button
+              // TODO: dont let users add more than one message, unless they clear out the previous one
+
               className={createCardStyles.addMessageButton}
               onClick={e => {
                 const ctx = canvasRef.current.getContext("2d")
@@ -405,10 +426,11 @@ const CreateCard = props => {
             }}
             onTouchStart={e => {
               let touch = e.touches[0]
-              console.log(touch)
+              console.log(e.nativeEvent.view.pageYOffset)
 
               let x = touch.clientX - bounds.left
               let y = touch.clientY - bounds.top
+              //let y = e.nativeEvent.view.pageYOffset - bounds.top
 
               console.log(x, y, bounds)
 
